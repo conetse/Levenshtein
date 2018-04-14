@@ -48,11 +48,11 @@ const (
 	LEV_EDIT_LAST // sometimes returned when an error occurs
 )
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Basic stuff, Levenshtein distance
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 type RuneSlice []rune
 
@@ -331,11 +331,11 @@ func Ratio(s1, s2 string) float64 {
 	return float64(lensum-ldist) / float64(lensum)
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Other simple distances: Hamming, Jaro, Jaro-Winkler
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // lev_hamming_distance:
 //
@@ -529,11 +529,11 @@ func Jaro_winkler(s1, s2 string) float64 {
 	return lev_jaro_winkler_ratio(rs1, rs2, STD_PREFIX_WEIGHT)
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Generalized medians, the greedy algorithm, and greedy improvements
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // compute the sets of symbols each string contains, and the set of symbols
 // in any of them (symset).  meanwhile, count how many different symbols
@@ -800,7 +800,8 @@ func lev_median_improve(rs []rune, rstrlis [][]rune, weights []float64) string {
 	mi := 1
 	medlen := len(rs)
 	copy(median[mi:], rs)
-	minminsum := finish_distance_computations(medlen, median[mi:(mi+medlen)], rstrlis, weights, rows, row)
+	minminsum := finish_distance_computations(medlen,
+		median[mi:(mi+medlen)], rstrlis, weights, rows, row)
 	// sequentially try perturbations on all positions
 	var operation, pos int
 	var symbol, orig_symbol rune
@@ -816,7 +817,8 @@ func lev_median_improve(rs []rune, rstrlis [][]rune, weights []float64) string {
 					continue
 				}
 				median[mi+pos] = tmp_symbol
-				sum := finish_distance_computations(medlen-pos, median[(mi+pos):(mi+medlen)], rstrlis, weights, rows, row)
+				sum := finish_distance_computations(medlen-pos,
+					median[(mi+pos):(mi+medlen)], rstrlis, weights, rows, row)
 				if sum < minminsum {
 					minminsum = sum
 					symbol = tmp_symbol
@@ -831,7 +833,8 @@ func lev_median_improve(rs []rune, rstrlis [][]rune, weights []float64) string {
 		orig_symbol = median[mi+pos-1]
 		for _, tmp_symbol := range symlist {
 			median[mi+pos-1] = tmp_symbol
-			sum := finish_distance_computations(medlen-pos+1, median[(mi+pos-1):(mi+medlen)], rstrlis, weights, rows, row)
+			sum := finish_distance_computations(medlen-pos+1,
+				median[(mi+pos-1):(mi+medlen)], rstrlis, weights, rows, row)
 			if sum < minminsum {
 				minminsum = sum
 				symbol = tmp_symbol
@@ -842,7 +845,8 @@ func lev_median_improve(rs []rune, rstrlis [][]rune, weights []float64) string {
 		// IF pos < medlength: try to delete the symbol at pos, if it lowers
 		// the total distance remember it (decrease medlength)
 		if pos < medlen {
-			sum := finish_distance_computations(medlen-pos-1, median[(mi+pos+1):(mi+medlen)], rstrlis, weights, rows, row)
+			sum := finish_distance_computations(medlen-pos-1,
+				median[(mi+pos+1):(mi+medlen)], rstrlis, weights, rows, row)
 			if sum < minminsum {
 				minminsum = sum
 				operation = LEV_EDIT_DELETE
@@ -960,11 +964,11 @@ func Median_improve(s string, strlis []string, wlist []float64) string {
 	return median_improve_common(s, strlis, wlist, lev_median_improve)
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Quick (voting) medians
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // compute the sets of symbols each string contains, and the set of symbols
 // in any of them (symset).  meanwhile, count how many different symbols
@@ -1069,11 +1073,11 @@ func Quickmedian(strlis []string, wlist []float64) string {
 	return median_common(strlis, wlist, lev_quick_median)
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Set medians
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // lev_set_median_index:
 // weights: The string weights (they behave exactly as multiplicities, though
@@ -1173,11 +1177,11 @@ func Setmedian(strlis []string, wlist []float64) string {
 	return median_common(strlis, wlist, lev_set_median)
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Set, sequence distances
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // lev_edit_seq_distance:
 // strlis1: An array of strings that may contain NUL characters.

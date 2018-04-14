@@ -66,7 +66,8 @@ func FormatLevEditOp(op *LevEditOp) string {
 	if op == nil {
 		return "nil"
 	}
-	return "LevEditOp" + fmt.Sprintf("LevEditOp(OpType: %s, Spos: %d, Dpos: %d)", getOpTypeName(op.OpType), op.Spos, op.Dpos)
+	return "LevEditOp" + fmt.Sprintf("LevEditOp(OpType: %s, Spos: %d, Dpos: %d)",
+		getOpTypeName(op.OpType), op.Spos, op.Dpos)
 }
 
 func FormatLevEditOps(ops []*LevEditOp) string {
@@ -76,7 +77,8 @@ func FormatLevEditOps(ops []*LevEditOp) string {
 			strs[i] = "nil"
 			continue
 		}
-		strs[i] = fmt.Sprintf("(%s, %d, %d)", getOpTypeName(op.OpType), op.Spos, op.Dpos)
+		strs[i] = fmt.Sprintf("(%s, %d, %d)",
+			getOpTypeName(op.OpType), op.Spos, op.Dpos)
 	}
 	return "LevEditOp[" + strings.Join(strs, ", ") + "]"
 }
@@ -85,7 +87,8 @@ func FormatLevOpCode(bop *LevOpCode) string {
 	if bop == nil {
 		return "nil"
 	}
-	return fmt.Sprintf("LevOpCode(OpType: %s, Dpos: %d, Send: %d, Dbeg: %d, Dend: %d)", getOpTypeName(bop.OpType), bop.Sbeg, bop.Send, bop.Dbeg, bop.Dend)
+	return fmt.Sprintf("LevOpCode(OpType: %s, Dpos: %d, Send: %d, Dbeg: %d, Dend: %d)",
+		getOpTypeName(bop.OpType), bop.Sbeg, bop.Send, bop.Dbeg, bop.Dend)
 }
 
 func FormatLevOpCodes(ops []*LevOpCode) string {
@@ -95,7 +98,8 @@ func FormatLevOpCodes(ops []*LevOpCode) string {
 			strs[i] = "nil"
 			continue
 		}
-		strs[i] = fmt.Sprintf("(%s, %d, %d, %d, %d)", getOpTypeName(bop.OpType), bop.Sbeg, bop.Send, bop.Dbeg, bop.Dend)
+		strs[i] = fmt.Sprintf("(%s, %d, %d, %d, %d)",
+			getOpTypeName(bop.OpType), bop.Sbeg, bop.Send, bop.Dbeg, bop.Dend)
 	}
 	return "LevOpCode[" + strings.Join(strs, ", ") + "]"
 }
@@ -104,7 +108,8 @@ func FormatLevMatchingBlock(mb *LevMatchingBlock) string {
 	if mb == nil {
 		return "nil"
 	}
-	return fmt.Sprintf("LevMatchingBlock(Spos: %d, Dpos: %d, Len: %d)", mb.Spos, mb.Dpos, mb.Len)
+	return fmt.Sprintf("LevMatchingBlock(Spos: %d, Dpos: %d, Len: %d)",
+		mb.Spos, mb.Dpos, mb.Len)
 }
 
 func FormatLevMatchingBlocks(mbs []*LevMatchingBlock) string {
@@ -119,11 +124,11 @@ func FormatLevMatchingBlocks(mbs []*LevMatchingBlock) string {
 	return "LevMatchingBlock[" + strings.Join(strs, ", ") + "]"
 }
 
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 //
 // Editops and other difflib-like stuff.
 //
-// /////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 // lev_editops_find:
 //
