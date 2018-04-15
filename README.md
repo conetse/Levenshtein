@@ -76,7 +76,7 @@ func main() {
 
 ## Links
 
-The similar API Python module is here [Python-Levensthtein](https://pypi.python.org/pypi/python-Levenshtein).
+The similar API Python module is here [Python-Levensthtein(pipi)](https://pypi.python.org/pypi/python-Levenshtein) [Python-Levensthtein(git)](https://github.com/miohtama/python-Levenshtein).
 
 ## License
 This project is under the MIT License.
