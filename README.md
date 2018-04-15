@@ -73,6 +73,7 @@ func main() {
 }
 ```
 
+More and complete api usage example is in file  levenshtein_test.go.
 
 ## Links
 
